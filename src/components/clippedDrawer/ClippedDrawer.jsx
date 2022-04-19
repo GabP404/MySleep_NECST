@@ -13,7 +13,8 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
-
+import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
+import WatchRoundedIcon from "@mui/icons-material/WatchRounded";
 const drawerWidth = 240;
 
 const ClippedDrawer = () => {
@@ -47,29 +48,29 @@ const ClippedDrawer = () => {
                 <Toolbar />
                 <Box sx={{ overflow: "auto" }}>
                     <List>
-                        {["Diagnostica", "Analisi Dettagliata"].map(
-                            (text, index) => (
-                                <ListItem button key={text}>
-                                    <ListItemIcon></ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItem>
-                            )
-                        )}
+                        <ListItem button>
+                            <ListItemIcon>
+                                <InsertChartOutlinedSharpIcon></InsertChartOutlinedSharpIcon>
+                            </ListItemIcon>
+                            <ListItemText Typography>DIAGNOSTICA</ListItemText>
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <AddchartRoundedIcon></AddchartRoundedIcon>
+                            </ListItemIcon>
+                            <ListItemText Typography>
+                                ANALISI DETTAGLIATA
+                            </ListItemText>
+                        </ListItem>
                     </List>
                     <Divider />
                     <List>
-                        {["Dispositi"].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>
-                                    {index % 2 === 0 ? (
-                                        <InboxIcon />
-                                    ) : (
-                                        <MailIcon />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText primary={text} />
-                            </ListItem>
-                        ))}
+                        <ListItem button>
+                            <ListItemIcon>
+                                <WatchRoundedIcon></WatchRoundedIcon>
+                            </ListItemIcon>
+                            <ListItemText Typography>POLAR</ListItemText>
+                        </ListItem>
                     </List>
                 </Box>
             </Drawer>

@@ -4,7 +4,7 @@ import Login from "./pages/login/Login";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ClippedDrawer from "./components/clippedDrawer/ClippedDrawer";
 
-import { createTheme } from "@mui/material/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
     palette: {
@@ -20,56 +20,26 @@ const theme = createTheme({
         },
     },
     typography: {
-        fontSize: 15,
+        fontFamily: "Nunito",
+        fontSize: 13,
         fontWeightRegular: 400,
         fontWeightBold: 600,
-        h1: {
-            fontFamily: "Nunito",
-        },
-        h2: {
-            fontFamily: "Nunito",
-        },
-        h3: {
-            fontFamily: "Nunito",
-        },
-        h4: {
-            fontFamily: "Nunito",
-        },
-        h5: {
-            fontFamily: "Nunito",
-        },
-        overline: {
-            fontFamily: "Nunito",
-        },
-        caption: {
-            fontFamily: "Nunito",
-        },
-        button: {
-            fontFamily: "Nunito",
-        },
-        body2: {
-            fontFamily: "Nunito",
-        },
-        subtitle1: {
-            fontFamily: "Nunito",
-        },
-        subtitle2: {
-            fontFamily: "Nunito",
-        },
     },
 });
 
 function App() {
     return (
         <div className="App">
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/">
-                        <Route index element={<Home />} />
-                        <Route path="login" element={<Login />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/">
+                            <Route index element={<Home />} />
+                            <Route path="login" element={<Login />} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
+            </ThemeProvider>
         </div>
     );
 }
