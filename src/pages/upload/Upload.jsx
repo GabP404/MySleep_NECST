@@ -1,6 +1,16 @@
 import React from 'react'
 import "./upload.scss"
 import * as XLSX from 'xlsx';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import { width } from '@mui/system';
+import Avatar from '@mui/material/Avatar';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+
+
 
 
 const names_replace_excel = ['date','nap_time','sleep_hour',
@@ -359,20 +369,55 @@ function getTimePartInMilliseconds(t){
          t.getSeconds()) * 1000 + t.getMilliseconds();
 }
 
+const Input = styled('input')({
+    display: 'none',
+  });
 
-const Upload= () => {
+const Upload = () => {
+
+    
+
+    const paperStyle = {
+        padding:20,
+        width: 280,
+        margin: "20px auto",
+    }
+    const avatarStyle = {
+        backgroundColor: '#8ecae6'
+    }
+
     return(
-        <div className="upload">
-            <h1>Upload</h1>
-            <div>
-                <input type="file" onChange={(e) => {
+        <Grid container spacing = {2} padding = '40px'>
+            <Paper elevation={20} style={paperStyle}>
+                <Grid align='center' >
+                    <Avatar style={avatarStyle} variant="rounded">
+                        <CloudUploadIcon />
+                    </Avatar>
+                    <h2>Upload</h2>
+                </Grid>
+                <Grid align='center' padding = '20px'>    
+                    <h5> Select the .xlsx file to get the datasleep analysis</h5>
+                    <label htmlFor="contained-button-file">
+                        <Input id="contained-button-file" multiple type="file" onChange={(e) => {
                     const file = e.target.files[0];
                     readExcel(file);
-                    
-                }}></input>
-            </div> 
-        </div>
+                } }/>
+                        <Button variant="contained" component="span">
+                        Upload
+                        </Button>
+                    </label>   
+                </Grid>
+            </Paper>
+        </Grid>
     )
 }
 
 export default Upload;
+/*
+<input type="file" onChange={(e) => {
+                    const file = e.target.files[0];
+                    readExcel(file);
+
+                } }></input>
+
+                */

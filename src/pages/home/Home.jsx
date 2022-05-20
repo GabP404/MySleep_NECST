@@ -1,29 +1,43 @@
-import React from "react";
+import * as React from 'react';
+import ReactDOM from 'react-dom';
 import "./home.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ClippedDrawer from "../../components/clippedDrawer/ClippedDrawer";
 import * as XLSX from 'xlsx';
 import { DataArrayTwoTone } from "@mui/icons-material";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
+import Grid from '@mui/material/Grid';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
 
 const data_chart = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}];
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+
 
 
 const Home = () => {
     return (
         <div className="home">
-           {/*  <Sidebar />
-            <div className="homeContainer">container</div> 
-             <ClippedDrawer/>  */}  
-            <div>
-                <LineChart width={600} height={300} data={data_chart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                    <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                </LineChart>
-            </div>
+           {/*<Sidebar />*/}
+            <ClippedDrawer/> 
+            {/* <div>
+                    <LineChart width={600} height={300} data={data_chart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                        <XAxis dataKey="name" />
+                        <YAxis />
+                        <Tooltip />
+                    </LineChart>
+            </div> */}
+           
         </div>
     );
 };

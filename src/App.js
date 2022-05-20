@@ -33,7 +33,7 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/">
-                            <Route path="home" element={<Home />} />
+                            <Route  path="home"  index element={<Home />} />
                             <Route index element={<Upload />} />
                         </Route>
                     </Routes>
