@@ -9,61 +9,72 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import {
+    useParams,
+    useNavigate,
+    useLocation,
+  } from "react-router-dom";
 
 
 
 
-const names_replace_excel = ['date','nap_time','sleep_hour',
+  
+
+
+
+const Upload = () => {
+
+    const names_replace_excel = ['date','nap_time','sleep_hour',
 'lights_off','fall_asleep_after_lights_off','expected_waking_time',
 'actual_waking_time','get_out_of_bed','times_wake_up_night','minutes_wake_up_night',
 'disturbed_sleep','sleep_quality','level_of_fatigue','level_of_sleepiness','daily_activity_goal','actual_sleep','sleep_continuity'];
 
 var months_values = [
-    { "month":"Gennaio", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Gen", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Febbraio", days:29 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Feb", days:29 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Marzo", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Mar", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Aprile", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Apr", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Maggio", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Mag", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Giugno", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Giu", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Luglio", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Lug", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Agosto", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Ago", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Settembre", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Set", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Ottobre", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Ott", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Novembre", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Nov", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     },
-    { "month":"Dicembre", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
+    { "month":"Dic", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
     "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
     }
@@ -104,9 +115,16 @@ const readExcel = (file) => {
 
         promise.then((d)=>{
             console.log("MBARE",d);
-            plot(d);
+            formatting_data(d);
+            localStorage.setItem('my-json',JSON.stringify(months_values));
+            localStorage.setItem('year_sleep_quality',year_sleep_quality);
+            
+            navigate("/home");
         })
 };
+
+let navigate = useNavigate();
+
 
 function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
@@ -166,7 +184,7 @@ const average = (data) => {
 
 function toDecimal(percent) {
 
-    //console.log("Parsing",percent ,parseFloat(percent) / 100);
+    //console.log("Parsing",percent ,Float(percent) / 100);
     return parseFloat(percent) / 100;
 }
 
@@ -176,7 +194,7 @@ function toPercentage(x) {
 }
 
 
-const plot = (data) => {
+const formatting_data = (data) => {
     data.forEach(element => {
         element.sleep_hour = create_date(element.date,element.sleep_hour);
         element.lights_off = create_date(element.date,element.lights_off);
@@ -209,45 +227,6 @@ Prima delle 18 verranno considerati come pisolini, la mattina inizierà dalle or
 per trovare il tempo minimo per svolgere i calcoli, visto la possibilità di andare a dormire in due giorni diversi.
 23:00 -> 1:00 esempio
 */
-
-const get_sleep_hour_month_1 = (data) => {
-    var min_time = data[0].sleep_hour.getHours();
-    console.log(min_time);
-    var actual_month = 0;
-    var dates = [];
-    var x;
-
-    data.forEach(element => {
-        var month_element = element.sleep_hour.getMonth();
-        console.log(month_element);
-        dates[month_element].push(element.sleep_hour);
-        console.log(dates[month_element]);
-
-
-
-        if(month_element == actual_month) {
-            var element_hours = element.sleep_hour.getHours();
-            if(element_hours < 18) element_hours += 24;
-            if(min_time < 18)  min_time += 24;
-            if(min_time > element_hours) min_time = element_hours % 24;
-            console.log(min_time);
-        }else {
-            x = calculateAverageOfHours(dates[actual_month],min_time[actual_month]);
-            months_values[actual_month].sleep_hours_month = x;
-            min_time = element.sleep_hour.getHours();
-            actual_month++;
-        }
-    });
-    //ultimo mese
-    x = calculateAverageOfHours(dates[actual_month],min_time[actual_month]);
-    months_values[actual_month].sleep_hours_month = x;
-
-    months_values.forEach((element) => {
-        element.sleep_hours_month /= element.days;
-        Math.round(element.sleep_hours_month);
-    });
-};
-
 const get_sleep_hour_month = (data) => {
     var days_count = 0;
     months_values.forEach(element => {
@@ -373,9 +352,6 @@ const Input = styled('input')({
     display: 'none',
   });
 
-const Upload = () => {
-
-    
 
     const paperStyle = {
         padding:20,

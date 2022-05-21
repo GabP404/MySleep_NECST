@@ -157,61 +157,16 @@ function CustomTooltip( {active, payload, label} ) {
 
 
 
-const Home = () => {
-    return (
-        <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
-        <Toolbar>
-          <Typography variant="h6" noWrap component="div">
-            Clipped drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-        }}
-      >
-        <Toolbar />
-                <Box sx={{ overflow: "auto" }}>
-                    <List>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <InsertChartOutlinedSharpIcon></InsertChartOutlinedSharpIcon>
-                            </ListItemIcon>
-                            <ListItemText typography="true">DIAGNOSTICA</ListItemText>
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <AddchartRoundedIcon></AddchartRoundedIcon>
-                            </ListItemIcon>
-                            <ListItemText typography="true">
-                                ANALISI DETTAGLIATA
-                            </ListItemText>
-                        </ListItem>
-                    </List>
-                    <Divider />
-                    <List>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <WatchRoundedIcon></WatchRoundedIcon>
-                            </ListItemIcon>
-                            <ListItemText typography="true">POLAR</ListItemText>
-                        </ListItem>
-                    </List>
-                </Box>
-        
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <Toolbar />
+const Home1 = () => {
+
+    
+
+    return (   
+        <div className="home">
             <div className='homeContainer'>
-                <div className='chart'>
-                    <LineChart width = {450} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                        <Legend verticalAlign="top" height={36}/>
+                <div>
+                    <LineChart  data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                    <Legend verticalAlign="top" height={36}/>
                         <Line type="monotone" dataKey="sleep_time_month" stroke="#8884d8" name = "Sleep Time"/>
                         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                         <XAxis dataKey="month"
@@ -226,31 +181,10 @@ const Home = () => {
                         />
                         <Tooltip content = {<CustomTooltip_sleep/>}/>
                         <CartesianGrid vertical = {false}></CartesianGrid>
-                    </LineChart>       
-                </div>
-                <div className='chart'>
-                    {/*<ResponsiveContainer aspect = {9/4} minWidth = {300}>*/}
-                    <LineChart  width={450} height={300} data={plot_values}>
-                        <Legend verticalAlign="top" height={36}/>
-                        <Line type="monotone" dataKey="expected_waking_time_month" stroke="#8884d8" name = "Expected waking time"/>
-                        <Line type="monotone" dataKey="actual_waking_time_month" stroke="#82ca9d" name = "Actual waking time"/>
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="month"
-                        tickCount = {12}
-                        />
-                        <YAxis
-                            tickLine = {false}
-                            tickCount = {4}
-                            //tickFormatter = {(number) => number +':00'}
-                            domain = {[4,'auto']}
-                            allowDecimals = {false}
-                        />
-                        <Tooltip content = {<CustomTooltip_waking />}/>
-                        <CartesianGrid vertical = {false}></CartesianGrid>
                     </LineChart>
                 </div>
-                <div className='chart'>
-                        <LineChart width={450} height={300} data={plot_values} >
+                {/* <div>
+                        <LineChart width={1000} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                         <Legend verticalAlign="top" height={36}/>
                             <Line type="monotone" dataKey="expected_waking_time_month" stroke="#8884d8" name = "Expected waking time"/>
                             <Line type="monotone" dataKey="actual_waking_time_month" stroke="#82ca9d" name = "Actual waking time"/>
@@ -269,8 +203,28 @@ const Home = () => {
                             <CartesianGrid vertical = {false}></CartesianGrid>
                         </LineChart>
                 </div>
-                <div className='chart'>
-                        <BarChart width={450} height={300} data={plot_values} >
+                <div>
+                        <LineChart width={1000} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                        <Legend verticalAlign="top" height={36}/>
+                            <Line type="monotone" dataKey="expected_waking_time_month" stroke="#8884d8" name = "Expected waking time"/>
+                            <Line type="monotone" dataKey="actual_waking_time_month" stroke="#82ca9d" name = "Actual waking time"/>
+                            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+                            <XAxis dataKey="month"
+                            tickCount = {12}
+                            />
+                            <YAxis
+                                tickLine = {false}
+                                tickCount = {4}
+                                //tickFormatter = {(number) => number +':00'}
+                                domain = {[4,'auto']}
+                                allowDecimals = {false}
+                            />
+                            <Tooltip content = {<CustomTooltip_waking />}/>
+                            <CartesianGrid vertical = {false}></CartesianGrid>
+                        </LineChart>
+                </div>
+                <div>
+                        <BarChart width={1000} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                         <Legend verticalAlign="top" height={36}/>
                             <Bar dataKey="nap_time_month" fill="#8884d8" name = "Nap time"/>
                             <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
@@ -287,13 +241,17 @@ const Home = () => {
                             <CartesianGrid vertical = {false}></CartesianGrid>
                         </BarChart>
                 </div>
+
+                <div>
+                    <PieChart width={730} height={250}>
+                        <Pie data={plot_values} dataKey="level_of_sleepiness_month" nameKey="month" cx="50%" cy="50%" outerRadius={100} fill="#8884d8"/>
+                        <LabelList dataKey="month" position="top" />
+                        <Tooltip content = {<CustomTooltip/>}/>
+                    </PieChart>
+                </div> */}
             </div>
-      </Box>
-    </Box>
+        </div>
     );
 };
 
-export default Home;
-
-
-
+export default Home1;
