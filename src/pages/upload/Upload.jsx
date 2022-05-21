@@ -24,6 +24,33 @@ import {
 
 const Upload = () => {
 
+    var year_sleep_quality;
+
+    function checkUndefined(x) {
+        if (typeof x == 'undefined' || isNaN(x) == true)
+            return 0;
+        return x;
+    }
+
+    function get_POLAR(data) {
+        data.forEach((element) => {
+            var month_element = element.actual_waking_time.getMonth();
+            
+            months_values[month_element].daily_activity_goal_month += checkUndefined(parseFloat(element.daily_activity_goal));
+            months_values[month_element].actual_sleep_month += checkUndefined(parseFloat(element.actual_sleep));
+            months_values[month_element].sleep_continuity_month += checkUndefined(parseInt(element.sleep_continuity));
+
+            /* console.log("ACTIVITY GOAL",checkUndefined(parseFloat(element.daily_activity_goal)));
+            console.log("ACTUAL SLEEP",checkUndefined(parseFloat(element.actual_sleep)));
+            console.log("SLEEP CONTINUITY",checkUndefined(parseInt(element.sleep_continuity))); */
+        });
+        months_values.forEach(element => {
+            element.daily_activity_goal_month = Math.round(element.daily_activity_goal_month/element.days);
+            element.actual_sleep_month = Math.round(element.actual_sleep_month/element.days);
+            element.sleep_continuity_month = Math.round(element.sleep_continuity_month/element.days);
+        });
+    }
+
     const names_replace_excel = ['date','nap_time','sleep_hour',
 'lights_off','fall_asleep_after_lights_off','expected_waking_time',
 'actual_waking_time','get_out_of_bed','times_wake_up_night','minutes_wake_up_night',
@@ -119,7 +146,7 @@ const readExcel = (file) => {
             localStorage.setItem('my-json',JSON.stringify(months_values));
             localStorage.setItem('year_sleep_quality',year_sleep_quality);
             
-            navigate("/home");
+            //navigate("/home");
         })
 };
 
@@ -170,15 +197,17 @@ const average = (data) => {
         element.sleep_quality = Math.round(element.sleep_quality /element.days);
         element.level_of_fatigue = Math.round(element.level_of_fatigue/element.days);
         element.level_of_sleepiness = Math.round(element.level_of_sleepiness/ element.days);
-       /*  element.actual_sleep/= element.days;
-        element.actual_sleep = toPercentage(element.actual_sleep);
 
-        console.log(element.daily_activity_goal);
+        //POLAR
+        element.actual_sleep/= element.days;
+        console.log(element.actual_sleep);
+        
         element.daily_activity_goal= element.days;
         console.log(element.daily_activity_goal);
 
-        element.daily_activity_goal = toPercentage(element.daily_activity_goal);
-        element.sleep_continuity/= element.days; */
+        
+        element.sleep_continuity/= element.days; 
+        console.log(element.sleep_continuity);
     });
 };
 
@@ -207,7 +236,7 @@ const formatting_data = (data) => {
     data.splice(0, 1);
     console.log(data);
 
-    var year_sleep_quality = 0;
+    year_sleep_quality = 0;
     data.forEach((element) => {
         year_sleep_quality += element.sleep_quality;
     });
@@ -217,6 +246,7 @@ const formatting_data = (data) => {
     get_sleep_hour_month(data);
     get_sleep_time_month(data);
     get_waking_time_levels_month_nap_time_month_sleep_quality_month(data);
+    get_POLAR(data);
     console.log(months_values);
     
 
@@ -242,7 +272,7 @@ const get_sleep_hour_month = (data) => {
 const get_average_sleep_hour_month = (data) => {
     var min_time = data[0].sleep_hour.getHours() * 60 + data[0].sleep_hour.getMinutes();
     var hours = [];
-    console.log(data[0].sleep_hour);
+    //console.log(data[0].sleep_hour);
     hours.push(data[0].sleep_hour);
     for(var i = 1; i < data.length; i++) {
         hours.push(data[i].sleep_hour);
