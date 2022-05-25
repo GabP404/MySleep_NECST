@@ -14,14 +14,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Paper from '@mui/material/Paper';
+
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
 import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import WatchRoundedIcon from "@mui/icons-material/WatchRounded";
-import SingleLineChart from '../../components/CustomChart/SingleLineChart';
-import CustomTooltip from "../../components/CustomTooltip/CustomTooltip";
 import DoubleLineChart from '../../components/CustomChart/DoubleLineChart';
 import DoubleBarChart from '../../components/CustomChart/DoubleBarChart';
 import TransitionsModal from '../../components/modal/TransitionsModal';
@@ -36,12 +32,10 @@ import {
 
 const drawerWidth = 240;
 
+const Details = () => {
 
-var months_values = localStorage.getItem('my-json');
-var test_value = [{'month':'Gen', 'ora':22},{'month':'Feb', 'ora':25},{'month':'Marz', 'ora':19},{'month':'Apr', 'ora':26}];
-
+  var months_values = localStorage.getItem('my-json');
 var plot_values = JSON.parse(months_values);
-    console.log("Details",plot_values);
     parsing_Date();
 
 
@@ -61,12 +55,10 @@ function parsing_Date() {
       str[0] = parseInt(str[0]);
       str[1] = parseInt(str[1]);
       var y = str[0] + ((str[1] * 10) / 600);
-      console.log(y);
       return y;
   }
 
 
-const Details = () => {
     let navigate = useNavigate();
 
     return (
@@ -123,10 +115,11 @@ const Details = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3,} }>
         <Toolbar />
             <Box className='homeContainer' sx={{boxShadow:5, borderRadius:5 }}>
+            <SingleBarChart plot={plot_values} value={'fall_asleep_after_lights_off_month'} type={'int'} name={'Minutes to fall asleep after lights off'} text={"This chart describes the time after turning off the lights and sleep"} format={'int'}/>
             <DoubleLineChart  plot={plot_values} value2 ={'get_out_of_bed_month'} value1 ={"actual_waking_time_month"} type={'time'} name2={'Get out of bed'} name1={'Actual waking time'} text={"This chart shows the waste of time in the bed before get up (montly average)"} format={'time'}/>
             <DoubleBarChart  plot={plot_values} value2 ={'minutes_wake_up_night_month'} value1 ={"times_wake_up_night_month"} type={'int'} name2={'Minutes while awaken'} name1={'Times wake up night'} text={"This chart show how often you wake up in the night and for how long(total time per month)"} format={'int'}/>
             <SingleBarChart plot={plot_values} value={'nap_time_month'} type={'int'} name={'Nap time'} text={"This chart describes the minutes of nap (montly average)"} format={'int'}/>
-
+            
                
             </Box>
       </Box>

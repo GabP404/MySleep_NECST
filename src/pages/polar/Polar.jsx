@@ -37,12 +37,9 @@ import {
 const drawerWidth = 240;
 
 
-var months_values = localStorage.getItem('my-json');
-var test_value = [{'month':'Gen', 'ora':22},{'month':'Feb', 'ora':25},{'month':'Marz', 'ora':19},{'month':'Apr', 'ora':26}];
-
-
 
 const Polar = () => {
+    var months_values = localStorage.getItem('my-json');
     var plot_values = JSON.parse(months_values);
     let navigate = useNavigate();
 
@@ -113,68 +110,3 @@ const Polar = () => {
 }
 
 export default Polar;
-
-/*
- <div className='chart'>
-                    <LineChart width = {500} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                        <Legend verticalAlign="top" height={36}/>
-                        <Line type="monotone" dataKey="daily_activity_goal_month" stroke="#8884d8" name = "Daily activity Goal 0-100%"/>
-                        <ReferenceLine y={100} label="Nice level 100%" stroke="red" strokeDasharray="3 3" />
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        <XAxis dataKey="month"
-                        tickCount = {12}
-                        />
-                        <YAxis
-                            tickLine = {false}
-                            tickCount = {8}
-                            allowDecimals = {false}
-                            //tickFormatter = {(number) => number +':00'}
-                            domain={[0, 'dataMax + 20']}
-
-                        />
-                        <Tooltip />
-                        <CartesianGrid vertical = {false}></CartesianGrid>
-                    </LineChart>       
-                </div>
-                <div className='chart'>
-                    <LineChart width = {500} height={300} data={plot_values} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-                        <Legend verticalAlign="top" height={36}/>
-                        <Line type="monotone" dataKey="actual_sleep_month" stroke="#8884d8" name = "Actual sleep 0-100%"/>
-                        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                        
-                        <XAxis dataKey="month"
-                        tickCount = {12}
-                        />
-                        <YAxis
-                            tickLine = {false}
-                            tickCount = {5}
-                            allowDecimals = {false}
-                            //tickFormatter = {(number) => number +':00'}
-
-                        />
-                        <Tooltip/>
-                        <CartesianGrid vertical = {false}></CartesianGrid>
-                    </LineChart>       
-                </div>
-
-                <div className='chart'>
-                        <BarChart width={500} height={300} data={plot_values} >
-                        <Legend verticalAlign="top" height={36}/>
-                            <Bar dataKey="sleep_continuity_month" fill="#8884d8" name = "Sleep continuity"/>
-                            <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                            <XAxis dataKey="month"
-                            tickCount = {12}
-                            />
-                            <YAxis
-                        
-                                tickCount = {5}
-                                //tickFormatter = {(number) => number +':00'}
-                                allowDecimals = {false}
-                                domain={[0, 'dataMax + 1']}
-                            />
-                            <Tooltip/>
-                            <CartesianGrid vertical = {false}></CartesianGrid>
-                        </BarChart>
-                </div>
-
-*/

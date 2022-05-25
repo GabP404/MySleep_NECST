@@ -15,17 +15,13 @@ const SingleBarChart = (props) => {
     };
     
     const formatAxis = (value, type) =>{
-        //console.log('value & type',value,type);
         if(type == 'time') return formatAxis_time(value);
         return value;
     }
 
     const bestDomain = (data,x,type) => {
-        console.log(x);
         var min = Math.min.apply(Math, data.map(function(o) { return o[x]; }));
-        
         var max = Math.max.apply(Math, data.map(function(o) { return o[x]; }))
-        console.log(type);
         if(type == 'time') {
             min = Math.round(min) - 1;
             max = Math.round(max) + 1;
@@ -34,7 +30,6 @@ const SingleBarChart = (props) => {
             max = Math.round(max * 1.2);
         }
         
-        //console.log(min,max);
         return [min,max]; 
     }
     

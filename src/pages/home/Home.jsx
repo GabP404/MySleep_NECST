@@ -12,12 +12,8 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import Paper from '@mui/material/Paper';
 import InsertChartOutlinedSharpIcon from "@mui/icons-material/InsertChartOutlinedSharp";
 import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import WatchRoundedIcon from "@mui/icons-material/WatchRounded";
@@ -38,72 +34,75 @@ import SingleBarChart from '../../components/CustomChart/SingleBarChart';
 const drawerWidth = 240;
 
 
-  var months_values = localStorage.getItem('my-json'); 
-  parsing_Date();
-  console.log(months_values);
-  var plot_values;
+  
 
 
-  function parsing_Date() {
-      plot_values = JSON.parse(months_values);
-      plot_values.forEach(element => {
-          element.actual_waking_time_month = round_time(element.actual_waking_time_month.substring(11,16));
-          element.expected_waking_time_month = round_time(element.expected_waking_time_month.substring(11,16));
-          element.sleep_time_month = round_time(element.sleep_time_month);
-          element.sleep_hours_month = up_time(round_time(element.sleep_hours_month.substring(11,16)));
-      });
-  }
-
-    function round_time(x) {
-        var str = x.split(':');
-        str[0] = parseInt(str[0]);
-        str[1] = parseInt(str[1]);
-        var y = str[0] + ((str[1] * 10) / 600);
-        return y;
-    }
-
-    function up_time(x) {
-        if ( x>= 0 && x<=3) return x+24;
-        return x;
-    }
-
-
-  function format_time(x) {
-    var h = Math.trunc(x);
-    var m = x-h;
-    m = (m/10) * 600;
-    m = Math.round(m);
-    return padTo2Digits(h)+":"+padTo2Digits(m);
-  }
-
-  function padTo2Digits(num) {
-    return num.toString().padStart(2, '0');
-  }
-
-function CustomTooltip_sleep( {active, payload, label} ) {
-    if(active) 
-    return (
-        <div className='tooltip'>
-            <Typography variant='h6' >{payload[0].payload.month}</Typography>
-            <div style={{display: 'flex', flexDirection: 'column'}}>
-            {
-            React.Children.toArray(
-                payload.map((element)=> {      
-                    //console.log(chartType);                   
-                    return <Typography variant='h7' style={{color: element.stroke}} >{format_time(element.value)}</Typography>
-                }
-                )
-            )
-         
-            }
-            </div>
-        </div>
-
-    );
-}
  
 
 const Home = () => {
+
+    function parsing_Date() {
+        plot_values = JSON.parse(months_values);
+        plot_values.forEach(element => {
+            element.actual_waking_time_month = round_time(element.actual_waking_time_month.substring(11,16));
+            element.expected_waking_time_month = round_time(element.expected_waking_time_month.substring(11,16));
+            element.sleep_time_month = round_time(element.sleep_time_month);
+            element.sleep_hours_month = up_time(round_time(element.sleep_hours_month.substring(11,16)));
+        });
+    }
+  
+      function round_time(x) {
+          var str = x.split(':');
+          str[0] = parseInt(str[0]);
+          str[1] = parseInt(str[1]);
+          var y = str[0] + ((str[1] * 10) / 600);
+          return y;
+      }
+  
+      function up_time(x) {
+          if ( x>= 0 && x<=3) return x+24;
+          return x;
+      }
+  
+  
+    function format_time(x) {
+      var h = Math.trunc(x);
+      var m = x-h;
+      m = (m/10) * 600;
+      m = Math.round(m);
+      return padTo2Digits(h)+":"+padTo2Digits(m);
+    }
+  
+    function padTo2Digits(num) {
+      return num.toString().padStart(2, '0');
+    }
+  
+  function CustomTooltip_sleep( {active, payload, label} ) {
+      if(active) 
+      return (
+          <div className='tooltip'>
+              <Typography variant='h6' >{payload[0].payload.month}</Typography>
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+              {
+              React.Children.toArray(
+                  payload.map((element)=> {                      
+                      return <Typography variant='h7' style={{color: element.stroke}} >{format_time(element.value)}</Typography>
+                  }
+                  )
+              )
+           
+              }
+              </div>
+          </div>
+  
+      );
+  }
+   
+
+
+    var months_values = localStorage.getItem('my-json'); 
+    parsing_Date();
+    var plot_values;
     let navigate = useNavigate();
     return (
         <Box sx={{ display: 'flex' }}>

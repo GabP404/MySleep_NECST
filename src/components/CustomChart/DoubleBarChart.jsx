@@ -15,7 +15,6 @@ const DoubleBarChart = (props) => {
     };
     
     const formatAxis = (value, type) =>{
-        //console.log('value & type',value,type);
         if(type == 'time') return formatAxis_time(value);
         return value;
     }
@@ -26,7 +25,6 @@ const DoubleBarChart = (props) => {
         var max1 = Math.max.apply(Math, data.map(function(o) { return o[x1]; }));
         var max2 = Math.max.apply(Math, data.map(function(o) { return o[x2]; }));
         var min,max;
-        console.log(min1,min2,max1,max2);
         min = Math.min(min1,min2);
         max = Math.max(max1,max2);
         if(type == 'time') {
@@ -36,8 +34,6 @@ const DoubleBarChart = (props) => {
             min = 0;
             max = Math.round(max * 1.2);
         }
-        
-        console.log(min,max);
         return [min,max]; 
     }
 

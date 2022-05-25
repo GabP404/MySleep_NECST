@@ -15,17 +15,13 @@ const SingleAreaChart = (props) => {
     };
     
     const formatAxis = (value, type) =>{
-        //console.log('value & type',value,type);
         if(type == 'time') return formatAxis_time(value);
         return value;
     }
 
     const bestDomain = (data,x,type) => {
-        console.log(x);
         var min = Math.min.apply(Math, data.map(function(o) { return o[x]; }));
-        
         var max = Math.max.apply(Math, data.map(function(o) { return o[x]; }))
-        console.log(type);
         if(type == 'time') {
             min = Math.round(min) - 1;
             max = Math.round(max) + 1;
@@ -33,8 +29,6 @@ const SingleAreaChart = (props) => {
             min = 0;
             max = Math.round(max * 1.2);
         }
-        
-        //console.log(min,max);
         return [min,max]; 
     }
     
@@ -45,7 +39,7 @@ const SingleAreaChart = (props) => {
             <div className='chart'>
                 <div className='chart_decriptions'>
                 <div>
-                <AreaChart width = {450} height={300} data={props.plot} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <AreaChart width = {450} height={300} data={props.plot}>
                     <Legend verticalAlign="top" height={36}/>
                     <Area type="monotone" dataKey={props.value} stroke="#8884d8" fill="#8884d8" name ={props.name}/>
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />

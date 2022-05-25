@@ -30,7 +30,6 @@ const Upload = () => {
     function get_POLAR(data) {
         data.forEach((element) => {
             var month_element = element.actual_waking_time.getMonth();
-            
             months_values[month_element].daily_activity_goal_month += checkUndefined(parseFloat(element.daily_activity_goal));
             months_values[month_element].actual_sleep_month += checkUndefined(parseFloat(element.actual_sleep));
             months_values[month_element].sleep_continuity_month += checkUndefined(parseInt(element.sleep_continuity));
@@ -113,7 +112,6 @@ const readExcel = (file) => {
                 names_replace_excel.forEach((element) => {
                     var char = String.fromCharCode(i);
                     var pos = char+'1';
-                    //console.log(pos);
                     XLSX.utils.sheet_add_aoa(ws, [
                       [element]
                     ], { origin: pos }); 
@@ -132,7 +130,6 @@ const readExcel = (file) => {
         });
 
         promise.then((d)=>{
-            console.log("MBARE",d);
             formatting_data(d);
             localStorage.setItem('my-json',JSON.stringify(months_values));       
             navigate("/home");
@@ -146,33 +143,12 @@ function padTo2Digits(num) {
     return num.toString().padStart(2, '0');
   }
 
-
-const average_time = (milliseconds, days) => {
-    var avgTime = Math.round(milliseconds / days);
-    var result = new Date(avgTime);
-    return result;
-};
-
-
 const create_date = (date, time) => {
-    //console.log(time);
     var str = time.split(':');
     str[0] = padTo2Digits(str[0]);
     var new_date = date + " " + str[0]+ ":" + str[1] + ":00";
     return new Date(new_date);
 }
-
-function toDecimal(percent) {
-
-    //console.log("Parsing",percent ,Float(percent) / 100);
-    return parseFloat(percent) / 100;
-}
-
-function toPercentage(x) {
-    x = x * 100;
-    return toString(x+'%');
-}
-
 
 const formatting_data = (data) => {
     data.forEach(element => {
@@ -182,21 +158,12 @@ const formatting_data = (data) => {
         element.actual_waking_time = create_date(element.date,element.actual_waking_time);
         element.get_out_of_bed = create_date(element.date,element.get_out_of_bed);
     });
-    console.log("creating data",data);
-    //console.log(data);
     first_date = data[0];
     data.splice(0, 1);
-    //console.log(data);
-
-    //console.log(data[0].sleep_hour,data[1].actual_waking_time,get_time_between(data[0].sleep_hour,data[1].actual_waking_time));
     get_sleep_hour_month(data);
-
     get_sleep_time_month(data);
     get_plain_data(data);
     get_POLAR(data);
-    //console.log(months_values);
-    
-
 };
 
 /* Per fare una media sull'orario in cui si va a dormire assumo che l'orario minimo per andare a dormire sono le 18.
@@ -207,39 +174,31 @@ per trovare il tempo minimo per svolgere i calcoli, visto la possibilità di and
 const get_sleep_hour_month = (data) => {
     var days_count = 0;
     months_values.forEach(element => {
-        //console.log(element.month,days_count,element.days);
         element.sleep_hours_month = get_average_sleep_hour_month(data.slice(days_count,days_count + element.days));
         days_count += element.days;
         
     });
-    //console.log(months_values);
 };
 
 
 const get_average_sleep_hour_month = (data) => {
     var min_time = data[0].sleep_hour.getHours() * 60 + data[0].sleep_hour.getMinutes();
     var hours = [];
-    //console.log(data[0].sleep_hour);
     hours.push(data[0].sleep_hour);
     for(var i = 1; i < data.length; i++) {
         hours.push(data[i].sleep_hour);
         var element_hours = data[i].sleep_hour.getHours() * 60 + data[i].sleep_hour.getMinutes();
-        //console.log(i, min_time, element_hours);
         if(element_hours < 18 * 60) element_hours += (24 * 60);
         if(min_time < 18 * 60)  min_time += (24 * 60);
         if(min_time > element_hours) min_time = element_hours % (24 * 60);
-        //console.log(min_time);
     };
-    //console.log(new Date(min_time * 60000 - 3600000));
     var x = calculateAverageOfHours(hours,new Date(min_time * 60000 - 3600000));
     return x;
 }
 
 
 const get_sleep_time_month = (data) => {
-    console.log(first_date.sleep_hour,data[0].actual_waking_time);
     months_values[0].sleep_time_month = get_time_between(first_date.sleep_hour,data[0].actual_waking_time);
-    console.log(months_values[0].sleep_time_month);
     for(var i = 1; i < data.length; i++) {
         var month_element = data[i].sleep_hour.getMonth();
         months_values[month_element].sleep_time_month += get_time_between(data[i-1].sleep_hour,data[i].actual_waking_time);
@@ -264,36 +223,25 @@ const get_plain_data = (data) => {
         months_values[month_element].disturbed_sleep_month += parseInt(element.disturbed_sleep);
         months_values[month_element].sleep_quality_month += parseInt(element.sleep_quality);
         months_values[month_element].fall_asleep_after_lights_off_month += parseInt(element.fall_asleep_after_lights_off);
-        months_values[month_element].lights_off_month += parseInt(getTimePartInMilliseconds(element.lights_off));
         months_values[month_element].get_out_of_bed_month += parseInt(getTimePartInMilliseconds(element.get_out_of_bed));
-
     });
 
-    console.log("MONTH_VALUES before /days",months_values);
     
 
     months_values.forEach(element => {
-        /* element.actual_waking_time_month = Math.round(element.actual_waking_time_month/element.days);
-        element.actual_waking_time_month = new Date(element.actual_waking_time_month);
-        element.expected_waking_time_month = Math.round(element.expected_waking_time_month/element.days);
-        element.expected_waking_time_month = new Date(element.expected_waking_time_month); */
         element.expected_waking_time_month = get_average_date(element.expected_waking_time_month,element.days);
         element.actual_waking_time_month = get_average_date(element.actual_waking_time_month,element.days);
         element.lights_off_month = get_average_date(element.lights_off_month,element.days);
         element.get_out_of_bed_month = get_average_date(element.get_out_of_bed_month,element.days);
-
         element.level_of_fatigue_month = Math.round(element.level_of_fatigue_month/element.days);
         element.level_of_sleepiness_month = Math.round(element.level_of_sleepiness_month/element.days);  
         element.nap_time_month = Math.round(element.nap_time_month/element.days);
         element.sleep_quality_month = Math.round(element.sleep_quality_month/element.days);
-        //element.times_wake_up_night_month = Math.round(element.times_wake_up_night_month/element.days);
         element.minutes_wake_up_night_month = Math.round(element.minutes_wake_up_night_month/element.days);
         element.disturbed_sleep_month = Math.round(element.disturbed_sleep_month/element.days);
-        element.fall_asleep_after_lights_off_month = Math.round(element.fall_asleep_after_lights_off_month/element.days);
     });
     
 
-    console.log("MONTH_VALUES after /days",months_values);
 };
 
 function get_average_date(x,days) {
@@ -384,11 +332,3 @@ const Input = styled('input')({
 }
 
 export default Upload;
-/*
-<input type="file" onChange={(e) => {
-                    const file = e.target.files[0];
-                    readExcel(file);
-
-                } }></input>
-
-                */

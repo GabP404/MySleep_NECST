@@ -15,7 +15,6 @@ const DoubleLineChart = (props) => {
     };
     
     const formatAxis = (value, type) =>{
-        //console.log('value & type',value,type);
         if(type == 'time') return formatAxis_time(value);
         return value;
     }
@@ -26,7 +25,6 @@ const DoubleLineChart = (props) => {
         var max1 = Math.max.apply(Math, data.map(function(o) { return o[x1]; }));
         var max2 = Math.max.apply(Math, data.map(function(o) { return o[x2]; }));
         var min,max;
-        console.log(min1,min2,max1,max2);
         min = Math.min(min1,min2);
         max = Math.max(max1,max2);
         if(type == 'time') {
@@ -36,8 +34,6 @@ const DoubleLineChart = (props) => {
             min = 0;
             max = Math.round(max * 1.2);
         }
-        
-        console.log(min,max);
         return [min,max]; 
     }
 
@@ -45,7 +41,7 @@ const DoubleLineChart = (props) => {
             <div className='chart'>
                 <div className='chart_decriptions'>
                 <div>
-                <LineChart width = {450} height={300} data={props.plot} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <LineChart width = {450} height={300} data={props.plot} >
                     <Legend verticalAlign="top" height={36}/>
                     <Line type="monotone" dataKey={props.value1} stroke="#8884d8" name = {props.name1}/>
                     <Line type="monotone" dataKey={props.value2} stroke="#259d9f" name = {props.name2}/>
