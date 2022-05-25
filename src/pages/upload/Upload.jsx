@@ -14,12 +14,7 @@ import {
     useNavigate,
     useLocation,
   } from "react-router-dom";
-
-
-
-
-  
-
+import parseWithOptions from 'date-fns/esm/fp/parseWithOptions/index.js';
 
 
 const Upload = () => {
@@ -39,10 +34,6 @@ const Upload = () => {
             months_values[month_element].daily_activity_goal_month += checkUndefined(parseFloat(element.daily_activity_goal));
             months_values[month_element].actual_sleep_month += checkUndefined(parseFloat(element.actual_sleep));
             months_values[month_element].sleep_continuity_month += checkUndefined(parseInt(element.sleep_continuity));
-
-            /* console.log("ACTIVITY GOAL",checkUndefined(parseFloat(element.daily_activity_goal)));
-            console.log("ACTUAL SLEEP",checkUndefined(parseFloat(element.actual_sleep)));
-            console.log("SLEEP CONTINUITY",checkUndefined(parseInt(element.sleep_continuity))); */
         });
         months_values.forEach(element => {
             element.daily_activity_goal_month = Math.round(element.daily_activity_goal_month/element.days);
@@ -59,51 +50,51 @@ const Upload = () => {
 var months_values = [
     { "month":"Gen", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Feb", days:29 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Mar", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Apr", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Mag", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Giu", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Lug", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Ago", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Set", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Ott", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Nov", days:30 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     },
     { "month":"Dic", days:31 , "sleep_hours_month":0, "sleep_time_month":0, 
     "expected_waking_time_month": 0, "actual_waking_time_month": 0, "level_of_fatigue_month":0,
-    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0
+    "level_of_sleepiness_month":0, "nap_time_month":0, "sleep_quality_month":0, 'daily_activity_goal_month':0, 'actual_sleep_month':0, 'sleep_continuity_month':0,'times_wake_up_night_month':0, 'minutes_wake_up_night_month':0,'disturbed_sleep_month':0, 
     }
 ];
 
@@ -146,7 +137,7 @@ const readExcel = (file) => {
             localStorage.setItem('my-json',JSON.stringify(months_values));
             localStorage.setItem('year_sleep_quality',year_sleep_quality);
             
-            //navigate("/home");
+            navigate("/home");
         })
 };
 
@@ -244,8 +235,9 @@ const formatting_data = (data) => {
 
     console.log(data[0].sleep_hour,data[1].actual_waking_time,get_time_between(data[0].sleep_hour,data[1].actual_waking_time));
     get_sleep_hour_month(data);
+
     get_sleep_time_month(data);
-    get_waking_time_levels_month_nap_time_month_sleep_quality_month(data);
+    get_plain_data(data);
     get_POLAR(data);
     console.log(months_values);
     
@@ -304,7 +296,7 @@ const get_sleep_time_month = (data) => {
     });
 }
 
-const get_waking_time_levels_month_nap_time_month_sleep_quality_month = (data) => {
+const get_plain_data = (data) => {
     data.forEach((element) => {
         var month_element = element.actual_waking_time.getMonth();
         months_values[month_element].actual_waking_time_month += parseInt(getTimePartInMilliseconds(element.actual_waking_time));
@@ -312,28 +304,30 @@ const get_waking_time_levels_month_nap_time_month_sleep_quality_month = (data) =
         months_values[month_element].level_of_fatigue_month += parseInt(element.level_of_fatigue);
         months_values[month_element].level_of_sleepiness_month += parseInt(element.level_of_sleepiness);
         months_values[month_element].nap_time_month += parseInt(element.nap_time);
+        months_values[month_element].times_wake_up_night_month += parseInt(element.times_wake_up_night);
+        months_values[month_element].minutes_wake_up_night_month += parseInt(element.minutes_wake_up_night);
+        months_values[month_element].disturbed_sleep_month += parseInt(element.disturbed_sleep);
         months_values[month_element].sleep_quality_month += parseInt(element.sleep_quality);
     });
+
+    console.log("MONTH_VALUES before /days",months_values);
     
     months_values.forEach(element => {
         element.actual_waking_time_month = Math.round(element.actual_waking_time_month/element.days);
-
         element.actual_waking_time_month = new Date(element.actual_waking_time_month);
-
         element.expected_waking_time_month = Math.round(element.expected_waking_time_month/element.days);
         element.expected_waking_time_month = new Date(element.expected_waking_time_month);
-
         element.level_of_fatigue_month = Math.round(element.level_of_fatigue_month/element.days);
-    
         element.level_of_sleepiness_month = Math.round(element.level_of_sleepiness_month/element.days);  
-
-              
         element.nap_time_month = Math.round(element.nap_time_month/element.days);
-        
         element.sleep_quality_month = Math.round(element.sleep_quality_month/element.days);
-
+        element.times_wake_up_night_month = Math.round(element.times_wake_up_night_month/element.days);
+        element.minutes_wake_up_night_month = Math.round(element.minutes_wake_up_night_month/element.days);
+        element.disturbed_sleep_month = Math.round(element.disturbed_sleep_month/element.days);
     });
     
+
+    console.log("MONTH_VALUES after /days",months_values);
 };
 
 function get_time_between(night,morning) {

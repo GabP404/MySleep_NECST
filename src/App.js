@@ -1,9 +1,10 @@
 import React from "react";
 import Home from "./pages/home/Home";
 import Upload from "./pages/upload/Upload";
+import Polar from "./pages/polar/Polar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ClippedDrawer from "./components/clippedDrawer/ClippedDrawer";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+
 
 const theme = createTheme({
     palette: {
@@ -33,8 +34,9 @@ function App() {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/">
-                            <Route  path="home"  index element={<Home />} />
+                            <Route  path="home"  element={<Home />} />
                             <Route index element={<Upload />} />
+                            <Route  path="polar" element={<Polar />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>
