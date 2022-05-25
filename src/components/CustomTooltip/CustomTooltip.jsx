@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend,BarChart, Bar, Pie, PieChart, LabelList, ResponsiveContainer } from 'recharts';
+import Typography from '@mui/material/Typography';
 
 
-const CustomTooltip = ({active, payload, label,type}) =>{
+const CustomTooltip = ({active, payload, label,type,chartType}) =>{
+    
     function format_time(x) {
         var h = Math.trunc(x);
-        //console.log(x);
+        
         var m = x-h;
         m = (m/10) * 600;
         m = Math.round(m);
@@ -19,15 +21,25 @@ const CustomTooltip = ({active, payload, label,type}) =>{
       }
 
     switch(type) {
+        
         case 'time':
             if(active) {
                 return (
                     <div className='tooltip'>
-                        <h3>{payload[0].payload.month}</h3>
-                        {payload.map((element)=> {                          
-                            return <h4 style={{color: element.stroke}} >{format_time(element.value)}</h4>
-                        })}
-                        
+                        <Typography variant='h6' >{payload[0].payload.month}</Typography>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                        {
+                        React.Children.toArray(
+                            payload.map((element)=> {  
+                                //console.log(chartType);                    
+                                if(chartType == 'LineChart') return <Typography variant='h7'style={{color: element.stroke}} >{format_time(element.value)}</Typography>
+                                else return <Typography variant='h7' style={{color: element.fill}} >{format_time(element.value)}</Typography>
+                            }
+                            )
+                        )
+                     
+                        }
+                        </div>
                     </div>
         
                 );
@@ -37,10 +49,20 @@ const CustomTooltip = ({active, payload, label,type}) =>{
             if(active) {
                 return (
                     <div className='tooltip'>
-                        <h3>{payload[0].payload.month}</h3>
-                        {payload.map((element)=> {                        
-                            return <h4 style={{color: element.stroke}}>{element.value}</h4>
-                        })}
+                        <Typography variant='h6' >{payload[0].payload.month}</Typography>
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                        {
+                        React.Children.toArray(
+                            payload.map((element)=> {      
+                                //console.log(chartType);                   
+                                if(chartType == 'LineChart') return <Typography variant='h7' style={{color: element.stroke}} >{element.value}</Typography>
+                                else return <Typography variant='h7' style={{color: element.fill}} >{(element.value)}</Typography>
+                            }
+                            )
+                        )
+                     
+                        }
+                        </div>
                     </div>
         
                 );
@@ -51,3 +73,4 @@ const CustomTooltip = ({active, payload, label,type}) =>{
 }
 
 export default CustomTooltip;
+

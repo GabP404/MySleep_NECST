@@ -25,7 +25,7 @@ export default function TransitionsModal(props) {
 
   return (
     <div>
-      <Button variant="contained" onClick={handleOpen}>Info</Button>
+      <Button variant="contained" style={{color: 'white'}}onClick={handleOpen}>Info</Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"

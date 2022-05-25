@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./pages/home/Home";
 import Upload from "./pages/upload/Upload";
 import Polar from "./pages/polar/Polar";
+import Details from "./pages/details/Details";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
@@ -37,6 +38,7 @@ function App() {
                             <Route  path="home"  element={<Home />} />
                             <Route index element={<Upload />} />
                             <Route  path="polar" element={<Polar />} />
+                            <Route  path="details" element={<Details />} />
                         </Route>
                     </Routes>
                 </BrowserRouter>

@@ -25,6 +25,7 @@ import CustomTooltip from "../../components/CustomTooltip/CustomTooltip";
 import DoubleLineChart from '../../components/CustomChart/DoubleLineChart';
 import TransitionsModal from '../../components/modal/TransitionsModal';
 import SingleBarChart from '../../components/CustomChart/SingleBarChart';
+import SingleAreaChart from '../../components/CustomChart/SingleAreaChart';
 import { shadows } from '@mui/system';
 import {
     useParams,
@@ -70,14 +71,14 @@ const Polar = () => {
                             <ListItemIcon>
                                 <InsertChartOutlinedSharpIcon></InsertChartOutlinedSharpIcon>
                             </ListItemIcon>
-                            <ListItemText typography="true">DIAGNOSTICA</ListItemText>
+                            <ListItemText typography="true">ANALYSIS</ListItemText>
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick = {()=> navigate("/details")}>
                             <ListItemIcon>
                                 <AddchartRoundedIcon></AddchartRoundedIcon>
                             </ListItemIcon>
                             <ListItemText typography="true">
-                                ANALISI DETTAGLIATA
+                                DETAILS
                             </ListItemText>
                         </ListItem>
                     </List>
@@ -99,9 +100,9 @@ const Polar = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3,} }>
         <Toolbar />
             <Box className='homeContainer' sx={{boxShadow:5, borderRadius:5 }}>
-                <SingleLineChart plot={plot_values} value={'daily_activity_goal_month'} type={'int'} name={'Daily activity goal month'} text={"The activity goal is a daily target of movement (0-100)"}/>
+                <SingleAreaChart  plot={plot_values} value={'daily_activity_goal_month'} type={'int'} name={'Daily activity goal month'} text={"The activity goal is a daily target of movement (0-100)"}/>
                 <SingleBarChart plot={plot_values} value={'actual_sleep_month'} type={'int'} name={'Actual sleep month'} text={"This data tell you the actual sleep during the night (0-100)"}/>
-                <SingleLineChart plot={plot_values} value={'sleep_continuity_month'} type={'int'} name={'Sleep continuity month'} text={"This data tell you the sleep continuity during the nigth (0-10))"}/>
+                <SingleLineChart  plot={plot_values} value={'sleep_continuity_month'} type={'int'} name={'Sleep continuity month'} text={"This data tell you the sleep continuity during the nigth (0-10))"}/>
                
 
                

@@ -4,7 +4,7 @@ import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import TransitionsModal from '../modal/TransitionsModal';
 import "./chart.scss";
 
-const DoubleLineChart = (props) => {
+const DoubleBarChart = (props) => {
 
     function padTo2Digits(num) {
         return num.toString().padStart(2, '0');
@@ -45,10 +45,10 @@ const DoubleLineChart = (props) => {
             <div className='chart'>
                 <div className='chart_decriptions'>
                 <div>
-                <LineChart width = {450} height={300} data={props.plot} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <BarChart width = {450} height={300} data={props.plot}>
                     <Legend verticalAlign="top" height={36}/>
-                    <Line type="monotone" dataKey={props.value1} stroke="#8884d8" name = {props.name1}/>
-                    <Line type="monotone" dataKey={props.value2} stroke="#259d9f" name = {props.name2}/>
+                    <Bar dataKey={props.value1} fill="#8884d8" name = {props.name1}/>
+                    <Bar dataKey={props.value2} fill="#259d9f" name = {props.name2}/>
                     
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                     <XAxis dataKey="month"
@@ -61,10 +61,11 @@ const DoubleLineChart = (props) => {
                         allowDecimals = {false}
                         tickFormatter={(tick) => formatAxis(tick,props.format)}
                         domain = {bestDomain(props.plot,props.value1,props.value2,props.type)}
+
                     />
-                    <Tooltip content = {<CustomTooltip type={props.type} chartType={'LineChart'}/>}/>
+                    <Tooltip content = {<CustomTooltip type={props.type} chartType={'BarChart'}/>}/>
                     <CartesianGrid vertical = {false}></CartesianGrid>
-                </LineChart> 
+                </BarChart> 
                 </div>
                 <TransitionsModal text = {props.text}></TransitionsModal>      
             </div>
@@ -73,4 +74,4 @@ const DoubleLineChart = (props) => {
 }
 
 
-export default DoubleLineChart;
+export default DoubleBarChart;

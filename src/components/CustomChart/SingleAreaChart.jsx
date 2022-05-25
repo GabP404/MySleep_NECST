@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend,BarChart, Bar, Pie, PieChart, LabelList, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend,BarChart, Bar, Pie, PieChart, LabelList, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import CustomTooltip from '../CustomTooltip/CustomTooltip';
 import TransitionsModal from '../modal/TransitionsModal';
 import "./chart.scss";
+const SingleAreaChart = (props) => {
 
-const DoubleLineChart = (props) => {
 
     function padTo2Digits(num) {
         return num.toString().padStart(2, '0');
@@ -20,15 +20,12 @@ const DoubleLineChart = (props) => {
         return value;
     }
 
-    const bestDomain = (data,x1,x2,type) => {
-        var min1 = Math.min.apply(Math, data.map(function(o) { return o[x1]; }));
-        var min2 = Math.min.apply(Math, data.map(function(o) { return o[x2]; }));
-        var max1 = Math.max.apply(Math, data.map(function(o) { return o[x1]; }));
-        var max2 = Math.max.apply(Math, data.map(function(o) { return o[x2]; }));
-        var min,max;
-        console.log(min1,min2,max1,max2);
-        min = Math.min(min1,min2);
-        max = Math.max(max1,max2);
+    const bestDomain = (data,x,type) => {
+        console.log(x);
+        var min = Math.min.apply(Math, data.map(function(o) { return o[x]; }));
+        
+        var max = Math.max.apply(Math, data.map(function(o) { return o[x]; }))
+        console.log(type);
         if(type == 'time') {
             min = Math.round(min) - 1;
             max = Math.round(max) + 1;
@@ -37,19 +34,20 @@ const DoubleLineChart = (props) => {
             max = Math.round(max * 1.2);
         }
         
-        console.log(min,max);
+        //console.log(min,max);
         return [min,max]; 
     }
+    
+    
 
     return (
+    
             <div className='chart'>
                 <div className='chart_decriptions'>
                 <div>
-                <LineChart width = {450} height={300} data={props.plot} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <AreaChart width = {450} height={300} data={props.plot} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                     <Legend verticalAlign="top" height={36}/>
-                    <Line type="monotone" dataKey={props.value1} stroke="#8884d8" name = {props.name1}/>
-                    <Line type="monotone" dataKey={props.value2} stroke="#259d9f" name = {props.name2}/>
-                    
+                    <Area type="monotone" dataKey={props.value} stroke="#8884d8" fill="#8884d8" name ={props.name}/>
                     <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                     <XAxis dataKey="month"
                     tickCount = {12}
@@ -57,20 +55,21 @@ const DoubleLineChart = (props) => {
                     />
                     <YAxis
                         tickLine = {false}
+                        tick
                         tickCount = {5}
                         allowDecimals = {false}
                         tickFormatter={(tick) => formatAxis(tick,props.format)}
-                        domain = {bestDomain(props.plot,props.value1,props.value2,props.type)}
+                        domain = {bestDomain(props.plot,props.value,props.type)}
                     />
                     <Tooltip content = {<CustomTooltip type={props.type} chartType={'LineChart'}/>}/>
                     <CartesianGrid vertical = {false}></CartesianGrid>
-                </LineChart> 
+                </AreaChart> 
                 </div>
-                <TransitionsModal text = {props.text}></TransitionsModal>      
-            </div>
+                <TransitionsModal text = {props.text}></TransitionsModal>
+            </div>   
             </div>
     );
 }
 
 
-export default DoubleLineChart;
+export default SingleAreaChart;
