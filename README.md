@@ -46,6 +46,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 After running the local server you will see an upload page, in this page you can click the button 'Upload' and choose the .xlsx.\
 **Remember** : to use this tool the file needs this format:
+![Screenshot 2022-05-27 at 10 05 19](https://user-images.githubusercontent.com/64649398/170723532-9263dacd-b143-4f33-9677-8b7b09e5d64a.png)
+
 \
 **Advice**: if you try different files clear the browser cache before uploading the files in order to avoid problem with localStorage.
 
