@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# Welcome to MySleep project. 
+This web app is built with the React front-end framework. I used npm as packet manager.
+There also used library like:
+  #SheetJS
+  #Material-UI
+  #Recharts
+  #React-router
+  
+  
+## Description
+Professionals of the health sectors ranging from nutritionists to sleep researchers suggest using diaries to keep track of daily habits as a means to develop awareness, create accountability, and generate a sense of accomplishment.
+While useful in these directions, diaries end up containing a considerable amount of information that users either never look through or must analyze manually and in raw format. MySleep is built to visualize data in a useful and effective way. First of all, the web interface gives the opportunity to see meaningful data obtained after a data analysis. Secondly, is possible to compare data from different times in other to gain more consciousness about the lifestyle of the user and his journey throughout the year. Last but not least, this tool provides an aesthetically pleasing experience very easy to use. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Here some picture of the interface:
 
-## Available Scripts
+![Screenshot 2022-05-26 at 02 07 51](https://user-images.githubusercontent.com/64649398/170389167-58093250-352b-41da-8ef7-b2e0779cbdf5.png)
+![Screenshot 2022-05-26 at 02 08 00](https://user-images.githubusercontent.com/64649398/170389176-2106cd8a-e9df-416f-9cec-8411a893a4eb.png)
+![Screenshot 2022-05-26 at 02 08 08](https://user-images.githubusercontent.com/64649398/170389185-b01a31e7-b36a-4082-b3c9-54d284c82c6f.png)
+![Screenshot 2022-05-26 at 02 08 28](https://user-images.githubusercontent.com/64649398/170389240-99fcb07e-8d11-4f18-a8ab-6969d2c8efb4.png)
+![Screenshot 2022-05-26 at 02 08 20](https://user-images.githubusercontent.com/64649398/170389241-3f002f54-cacf-4d76-98f1-b500c88ccaf7.png)
+![Screenshot 2022-05-26 at 02 08 14](https://user-images.githubusercontent.com/64649398/170389242-01c4fb2e-9699-422a-9815-9459c4c1423c.png)
 
-In the project directory, you can run:
 
-### `npm start`
+## Installation  
+Open your terminal and then type
+```bash
+$ git clone https://github.com/rykel262/MySleep_NECST.git
+```
+This clones the repo
 
+
+cd into the new folder and type
+```bash
+$ npm install
+```
+This installs the required dependencies
+
+To run the React project
+```bash
+$ npm start  
+```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
+After running the local server you will see an upload page, in this page you can click the button 'Upload' and choose the .xlsx.\
+**Remember** : to use this tool the file needs this format:
+\
+**Advice**: if you try different files clear the browser cache before uploading the files in order to avoid problem with localStorage.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Main page
+In this page you will see the most important data
 
-### `npm run build`
+#### Polar Page:
+This page shows the data collected by the polar device
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Details page:
+In this page you will see other relevant data
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

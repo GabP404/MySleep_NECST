@@ -3,26 +3,19 @@ import "./upload.scss"
 import * as XLSX from 'xlsx';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import { width } from '@mui/system';
 import Avatar from '@mui/material/Avatar';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
 import {
-    useParams,
     useNavigate,
-    useLocation,
   } from "react-router-dom";
-import parseWithOptions from 'date-fns/esm/fp/parseWithOptions/index.js';
-
 
 const Upload = () => {
 
-    var year_sleep_quality;
 
     function checkUndefined(x) {
-        if (typeof x == 'undefined' || isNaN(x) == true)
+        if (typeof x === 'undefined' || isNaN(x))
             return 0;
         return x;
     }
@@ -306,7 +299,56 @@ const Input = styled('input')({
     }
 
     return(
-        <Grid container spacing = {2} padding = '40px'>
+        
+<Grid container spacing = {2} padding = '40px'>
+            <Paper elevation={20} style={paperStyle}>
+                <Grid container align='center' direction="row" justifyContent="center" alignItems="center">
+                <h2 className='item_left'>Upload</h2>
+                    <Avatar style={avatarStyle} variant="rounded">
+                        <CloudUploadIcon />
+                    </Avatar>
+                    
+                </Grid>
+                <Grid align='center' >    
+                    <h5 className = "item_upload"> Select the .xlsx file to get the datasleep analysis</h5>
+                    <label  htmlFor="contained-button-file">
+                        <Input  id="contained-button-file" multiple type="file" onChange={(e) => {
+                    const file = e.target.files[0];
+                    readExcel(file);
+                } }/>
+                        <Button variant="contained" component="span">
+                        Upload
+                        </Button>
+                    </label>   
+                </Grid>
+            </Paper>
+        </Grid>
+    )
+}
+
+export default Upload;
+
+/*
+
+<Avatar style={avatarStyle} variant="rounded">
+                        <CloudUploadIcon />
+</Avatar>
+                    <h2>Upload</h2>
+
+
+<h5> Select the .xlsx file to get the datasleep analysis</h5>
+<label htmlFor="contained-button-file">
+<Input id="contained-button-file" multiple type="file" onChange={(e) => {
+                    const file = e.target.files[0];
+                    readExcel(file); }} 
+<Button variant="contained" component="span">
+    Upload
+</Button>
+
+
+
+
+<Grid container spacing = {2} padding = '40px'>
             <Paper elevation={20} style={paperStyle}>
                 <Grid align='center' >
                     <Avatar style={avatarStyle} variant="rounded">
@@ -328,7 +370,4 @@ const Input = styled('input')({
                 </Grid>
             </Paper>
         </Grid>
-    )
-}
-
-export default Upload;
+*/

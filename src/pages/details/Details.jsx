@@ -1,7 +1,4 @@
 import React from 'react'
-import { Category, DataArrayTwoTone } from "@mui/icons-material";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend,BarChart, Bar, Pie, PieChart, LabelList, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import AppBar from '@mui/material/AppBar';
@@ -11,7 +8,6 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
@@ -20,13 +16,9 @@ import AddchartRoundedIcon from "@mui/icons-material/AddchartRounded";
 import WatchRoundedIcon from "@mui/icons-material/WatchRounded";
 import DoubleLineChart from '../../components/CustomChart/DoubleLineChart';
 import DoubleBarChart from '../../components/CustomChart/DoubleBarChart';
-import TransitionsModal from '../../components/modal/TransitionsModal';
 import SingleBarChart from '../../components/CustomChart/SingleBarChart';
-import { shadows } from '@mui/system';
 import {
-    useParams,
     useNavigate,
-    useLocation,
   } from "react-router-dom";
 
 
@@ -117,7 +109,7 @@ function parsing_Date() {
             <Box className='homeContainer' sx={{boxShadow:5, borderRadius:5 }}>
             <SingleBarChart plot={plot_values} value={'fall_asleep_after_lights_off_month'} type={'int'} name={'Minutes to fall asleep after lights off'} text={"This chart describes the time after turning off the lights and sleep"} format={'int'}/>
             <DoubleLineChart  plot={plot_values} value2 ={'get_out_of_bed_month'} value1 ={"actual_waking_time_month"} type={'time'} name2={'Get out of bed'} name1={'Actual waking time'} text={"This chart shows the waste of time in the bed before get up (montly average)"} format={'time'}/>
-            <DoubleBarChart  plot={plot_values} value2 ={'minutes_wake_up_night_month'} value1 ={"times_wake_up_night_month"} type={'int'} name2={'Minutes while awaken'} name1={'Times wake up night'} text={"This chart show how often you wake up in the night and for how long(total time per month)"} format={'int'}/>
+            <DoubleBarChart  plot={plot_values} value2 ={'minutes_wake_up_night_month'} value1 ={"times_wake_up_night_month"} type={'int'} name2={'Minutes while awake'} name1={'Times wake up night'} text={"This chart show how often you wake up in the night and for how long (total time per month)"} format={'int'}/>
             <SingleBarChart plot={plot_values} value={'nap_time_month'} type={'int'} name={'Nap time'} text={"This chart describes the minutes of nap (montly average)"} format={'int'}/>
             
                
